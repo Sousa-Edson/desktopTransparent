@@ -40,7 +40,7 @@ public class Home extends JFrame {
 		JLabel lbl_relatorio = new JLabel("RELATÓRIO");
 		JLabel lbl_cadastro = new JLabel("CADASTRO");
 		JLabel lbl_configuracao = new JLabel("CONFIG");
-		JLabel lblTitulo = new JLabel("MyEstoque");
+		//JLabel lblTitulo = new JLabel("MyEstoque");
 
 		/* MUDAR PONTEIRO DO MOUSE */
 		lbl_fechar.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
@@ -207,7 +207,7 @@ public class Home extends JFrame {
 		lbl_home.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblTitulo.setText("HOME");
+			 
 			}
 		});
 		ps_home.add(lbl_home);
