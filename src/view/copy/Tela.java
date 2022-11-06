@@ -1,4 +1,4 @@
-package view;
+package view.copy;
 
 import java.awt.Color;
 import java.awt.Cursor;

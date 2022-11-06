@@ -16,6 +16,7 @@ public class Aplication {
 				try {
 					Home frame = new Home();
 					frame.setLocationRelativeTo(null);
+//					frame.chamaProduto();
 					frame.setVisible(true);
 					System.out.println("ola");
 				} catch (Exception e) {

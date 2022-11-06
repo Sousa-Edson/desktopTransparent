@@ -1,4 +1,4 @@
-package view;
+package view.copy;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
+import java.text.BreakIterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,15 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
-import model.Produto;
-import model.ProdutoRepository;
-import model.TableModelo;
+import model.copy.Produto;
+import model.copy.TableModelProduto;
 
 public class Home extends JFrame {
 
@@ -39,8 +34,7 @@ public class Home extends JFrame {
 //	Color corPrincipal =  new Color(153, 193, 241); /*new Color(255, 64, 64);*/
 	Color corFundoMenu = new Color(153, 193, 241);
 	Color corFundoMenuFoco = new Color(100, 100, 100);
-//	TableModelo model;
-	ProdutoRepository repository = new ProdutoRepository();
+	TableModelProduto modelProduto;
 
 	/* COMPONENTES */
 	JPanel contentPane;
@@ -81,7 +75,8 @@ public class Home extends JFrame {
 		lbl_fechar.setBounds(1156, 12, 32, 32);
 		pn_sidebar.setBounds(0, 0, 189, 600);
 
-		table_1 = new JTable(); // ver se vai dar erro
+		modelProduto = new TableModelProduto();
+		table_1 = new JTable(modelProduto); // ver se vai dar erro
 		table_1.getTableHeader().setReorderingAllowed(false);
 		scrollPane = new JScrollPane(table_1);
 
@@ -306,11 +301,10 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ProdutoAdd pd = new ProdutoAdd();
 				pd.setVisible(true);
-
-				salvar(pd.r(), pd.n());
+				 
+				salvar(pd.r(),pd.n());
 //				Produto p = new Produto(id, nome);
 //				modelProduto.addProduto(p);
-//				LoadTable();
 			}
 		});
 		btnProduto.setBounds(141, 12, 117, 25);
@@ -349,8 +343,7 @@ public class Home extends JFrame {
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int linha = table_1.getSelectedRow();
-				repository.removeProduto(linha);
-				LoadTable();
+				modelProduto.removeProduto(linha);
 			}
 		});
 		btnRemover.setBounds(402, 462, 117, 25);
@@ -365,24 +358,6 @@ public class Home extends JFrame {
 	}
 
 	/**/
-	public void LoadTable() { // AQUI CARREGA A TABELA
-		String[] colunas = new String[] { "ID ", "SIGLA" };
-		ArrayList dados;
-		dados =  (ArrayList) repository.LoadTable();
-		TableModelo model = new TableModelo(dados, colunas); // AQUI MODELO SIMPLES DE TABELA
-		model(dados, colunas); // AQUI MODELO SIMPLES DE TABELA
-		table_1.setModel(model);
-//		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
-//		table_1.setRowSorter(sorter);
-//		table_1.getTableHeader().setReorderingAllowed(false);
-		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	}
-
-	private void model(ArrayList dados, String[] colunas) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void tabela() {
 		System.out.println("tabela chamada");
 		/* SEÇÃO DA TABELA */
@@ -397,9 +372,8 @@ public class Home extends JFrame {
 
 	public void salvar(int id, String nome) {
 //		Produto p = new Produto(id, nome);
-		repository.addProduto(new Produto(id, nome));
+		modelProduto.addProduto(new Produto(id, nome));
 		System.out.println("salvando....");
-		LoadTable();
 	}
 
 	public void ativaPainel0() {
