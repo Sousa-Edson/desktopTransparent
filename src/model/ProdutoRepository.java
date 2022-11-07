@@ -9,32 +9,16 @@ public class ProdutoRepository {
 		listaProduto = new ArrayList<Produto>();
 	}
 
-	public ArrayList<Produto> LoadTable() {
-		ArrayList dados = new ArrayList();
-		try {
-			for (Produto produto : listaProduto) {
-				dados.add(new Object[] { produto.getId(), produto.getNome() });
-			}
-		} catch (Exception e) {
-			System.out.println("erro ao carregar " + e);
-		}
-
-		return dados;
-	}
-
-	public void tamanho() {
-		System.out.println("tamanho em ProdutoRepository " + listaProduto.size());
-	}
-
 	public void addProduto(Produto p) {
 		this.listaProduto.add(p);
-		tamanho();
 
+//		fireTableDataChanged();
 		System.out.println(p.getNome());
 	}
 
 	public void removeProduto(int rowIndex) {
 		this.listaProduto.remove(rowIndex);
+//		fireTableDataChanged();
 	}
 
 	public Produto getpProduto(int rowIndex) {

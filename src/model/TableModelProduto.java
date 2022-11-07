@@ -1,4 +1,4 @@
-package model.copy;
+package model;
 
 import java.util.ArrayList;
 

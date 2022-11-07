@@ -13,9 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import model.Produto;
-import model.ProdutoRepository;
-
 public class ProdutoAdd extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -88,8 +85,6 @@ public class ProdutoAdd extends JDialog {
 						nome = txtNome.getText();
 //						Produto p = new Produto(id, nome);
 //						b.listaProduto.add(p);
-//						ProdutoRepository repository = new ProdutoRepository();
-//						repository.addProduto(new Produto(id, nome));
 						dispose();
 					}
 				});

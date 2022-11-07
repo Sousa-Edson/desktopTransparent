@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
+import java.text.BreakIterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,15 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import model.Produto;
-import model.ProdutoRepository;
-import model.TableModelo;
+import model.TableModelProduto;
 
 public class Home extends JFrame {
 
@@ -39,8 +34,7 @@ public class Home extends JFrame {
 //	Color corPrincipal =  new Color(153, 193, 241); /*new Color(255, 64, 64);*/
 	Color corFundoMenu = new Color(153, 193, 241);
 	Color corFundoMenuFoco = new Color(100, 100, 100);
-//	TableModelo model;
-	ProdutoRepository repository = new ProdutoRepository();
+	TableModelProduto modelProduto;
 
 	/* COMPONENTES */
 	JPanel contentPane;
@@ -49,6 +43,10 @@ public class Home extends JFrame {
 	JPanel panel_0 = new JPanel();
 	JPanel panel_1 = new JPanel();
 	JPanel panel_2 = new JPanel();
+
+	JPanel panel_3 = new JPanel();
+	JPanel panel_4 = new JPanel();
+
 	JTable table_1;
 	JScrollPane scrollPane;
 
@@ -72,16 +70,19 @@ public class Home extends JFrame {
 	private final JTextPane txtNome = new JTextPane();
 	private final JButton btnAdicionar = new JButton("adicionar");
 	private final JButton btnRemover = new JButton("remover");
+	private final JLabel lblConfig = new JLabel("");
 
 	/**
 	 * Create the frame.
 	 */
 	public Home() {
+
 		pn_configuracao.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
 		lbl_fechar.setBounds(1156, 12, 32, 32);
 		pn_sidebar.setBounds(0, 0, 189, 600);
 
-		table_1 = new JTable(); // ver se vai dar erro
+		modelProduto = new TableModelProduto();
+		table_1 = new JTable(modelProduto); // ver se vai dar erro
 		table_1.getTableHeader().setReorderingAllowed(false);
 		scrollPane = new JScrollPane(table_1);
 
@@ -128,7 +129,7 @@ public class Home extends JFrame {
 		pn_sidebar.add(pn_configuracao);
 		pn_configuracao.setLayout(null);
 
-		lbl_configuracao.addMouseListener(new MouseAdapter() {
+		pn_configuracao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pn_configuracao.setBackground(corFundoMenuFoco);
@@ -140,20 +141,23 @@ public class Home extends JFrame {
 				pn_configuracao.setBackground(corFundoMenu);
 				lbl_configuracao.setForeground(Color.black);
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ativaPainel4();
+			}
 		});
 		lbl_configuracao.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_configuracao.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_configuracao.setFont(new Font("Dialog", Font.BOLD, 20));
 		lbl_configuracao.setBounds(0, 0, 189, 97);
 		pn_configuracao.add(lbl_configuracao);
+		pn_cadastro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ativaPainel3();
+			}
 
-		pn_cadastro.setBorder(null);
-		pn_cadastro.setBounds(0, 382, 189, 97);
-		pn_cadastro.setBackground(corFundoMenu);
-		pn_sidebar.add(pn_cadastro);
-		pn_cadastro.setLayout(null);
-
-		lbl_cadastro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pn_cadastro.setBackground(corFundoMenuFoco);
@@ -166,6 +170,13 @@ public class Home extends JFrame {
 				lbl_cadastro.setForeground(Color.black);
 			}
 		});
+
+		pn_cadastro.setBorder(null);
+		pn_cadastro.setBounds(0, 382, 189, 97);
+		pn_cadastro.setBackground(corFundoMenu);
+		pn_sidebar.add(pn_cadastro);
+		pn_cadastro.setLayout(null);
+
 		lbl_cadastro.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_cadastro.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_cadastro.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -244,6 +255,12 @@ public class Home extends JFrame {
 		lbl_home.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_home.setFont(new Font("Dialog", Font.BOLD, 20));
 		ps_home.add(lbl_home);
+
+		JLabel lblLogotipo = new JLabel("");
+		lblLogotipo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogotipo.setIcon(new ImageIcon(Home.class.getResource("/img/java32.png")));
+		lblLogotipo.setBounds(12, 12, 165, 31);
+		pn_sidebar.add(lblLogotipo);
 		ps_home.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -310,9 +327,17 @@ public class Home extends JFrame {
 				salvar(pd.r(), pd.n());
 //				Produto p = new Produto(id, nome);
 //				modelProduto.addProduto(p);
-//				LoadTable();
 			}
 		});
+		panel_4.setBackground(new Color(155, 0, 0));
+		panel_4.setBounds(0, 0, 987, 532);
+		layeredPane.add(panel_4);
+		panel_4.setLayout(null);
+		lblConfig.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConfig.setIcon(new ImageIcon(Home.class.getResource("/img/java512.png")));
+		lblConfig.setBounds(12, 12, 963, 508);
+		
+		panel_4.add(lblConfig);
 		btnProduto.setBounds(141, 12, 117, 25);
 		panel_1.add(btnProduto);
 		textField = new JTextField();
@@ -349,8 +374,7 @@ public class Home extends JFrame {
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int linha = table_1.getSelectedRow();
-				repository.removeProduto(linha);
-				LoadTable();
+				modelProduto.removeProduto(linha);
 			}
 		});
 		btnRemover.setBounds(402, 462, 117, 25);
@@ -360,29 +384,17 @@ public class Home extends JFrame {
 		panel_2.setBackground(new Color(0, 255, 0));
 		panel_2.setBounds(0, 0, 987, 532);
 		layeredPane.add(panel_2);
+		/**/
+		panel_3.setBackground(new Color(0, 155, 0));
+		panel_3.setBounds(0, 0, 987, 532);
+		layeredPane.add(panel_3);
+
+		/**/
 //		chamaProduto();
 		ativaPainel0();
 	}
 
 	/**/
-	public void LoadTable() { // AQUI CARREGA A TABELA
-		String[] colunas = new String[] { "ID ", "SIGLA" };
-		ArrayList dados;
-		dados =  (ArrayList) repository.LoadTable();
-		TableModelo model = new TableModelo(dados, colunas); // AQUI MODELO SIMPLES DE TABELA
-		model(dados, colunas); // AQUI MODELO SIMPLES DE TABELA
-		table_1.setModel(model);
-//		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
-//		table_1.setRowSorter(sorter);
-//		table_1.getTableHeader().setReorderingAllowed(false);
-		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	}
-
-	private void model(ArrayList dados, String[] colunas) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void tabela() {
 		System.out.println("tabela chamada");
 		/* SEÇÃO DA TABELA */
@@ -397,27 +409,43 @@ public class Home extends JFrame {
 
 	public void salvar(int id, String nome) {
 //		Produto p = new Produto(id, nome);
-		repository.addProduto(new Produto(id, nome));
+		modelProduto.addProduto(new Produto(id, nome));
 		System.out.println("salvando....");
-		LoadTable();
+	}
+
+	public void desativaPainel() {
+		panel_0.setVisible(!true);
+		panel_1.setVisible(!true);
+		panel_2.setVisible(!true);
+		panel_3.setVisible(!true);
+		panel_4.setVisible(!true);
+
 	}
 
 	public void ativaPainel0() {
+		desativaPainel();
 		panel_0.setVisible(true);
-		panel_1.setVisible(!true);
-		panel_2.setVisible(!true);
+		ativaPainel4();
 	}
 
 	public void ativaPainel1() {
-		panel_0.setVisible(!true);
+		desativaPainel();
 		panel_1.setVisible(true);
-		panel_2.setVisible(!true);
 	}
 
 	private void ativaPainel2() {
-		panel_0.setVisible(!true);
-		panel_1.setVisible(!true);
+		desativaPainel();
 		panel_2.setVisible(true);
+	}
+
+	private void ativaPainel3() {
+		desativaPainel();
+		panel_3.setVisible(true);
+	}
+
+	private void ativaPainel4() {
+		desativaPainel();
+		panel_4.setVisible(true);
 	}
 
 	public void pressTela(MouseEvent e) {
