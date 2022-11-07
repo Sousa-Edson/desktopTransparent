@@ -316,6 +316,13 @@ public class HomeForm extends JFrame {
 		tabela();
 
 		JButton btnUnidade = new JButton("UNIDADE");
+		btnUnidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UnidadeDialog unidade = new UnidadeDialog();
+				unidade.setLocationRelativeTo(null);
+				unidade.setVisible(true);
+			}
+		});
 		btnUnidade.setBounds(12, 12, 117, 25);
 		panel_1.add(btnUnidade);
 		JButton btnProduto = new JButton("PRODUTO");
@@ -329,15 +336,6 @@ public class HomeForm extends JFrame {
 //				modelProduto.addProduto(p);
 			}
 		});
-		panel_4.setBackground(new Color(155, 0, 0));
-		panel_4.setBounds(0, 0, 987, 532);
-		layeredPane.add(panel_4);
-		panel_4.setLayout(null);
-		lblConfig.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConfig.setIcon(new ImageIcon(HomeForm.class.getResource("/img/java512.png")));
-		lblConfig.setBounds(12, 12, 963, 508);
-		
-		panel_4.add(lblConfig);
 		btnProduto.setBounds(141, 12, 117, 25);
 		panel_1.add(btnProduto);
 		textField = new JTextField();
@@ -388,6 +386,15 @@ public class HomeForm extends JFrame {
 		panel_3.setBackground(new Color(0, 155, 0));
 		panel_3.setBounds(0, 0, 987, 532);
 		layeredPane.add(panel_3);
+		panel_4.setBackground(new Color(155, 0, 0));
+		panel_4.setBounds(0, 0, 987, 532);
+		layeredPane.add(panel_4);
+		panel_4.setLayout(null);
+		lblConfig.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConfig.setIcon(new ImageIcon(HomeForm.class.getResource("/img/java512.png")));
+		lblConfig.setBounds(12, 12, 963, 508);
+
+		panel_4.add(lblConfig);
 
 		/**/
 //		chamaProduto();
@@ -425,7 +432,7 @@ public class HomeForm extends JFrame {
 	public void ativaPainel0() {
 		desativaPainel();
 		panel_0.setVisible(true);
-		ativaPainel4();
+//		ativaPainel4();
 	}
 
 	public void ativaPainel1() {
