@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class ProdutoAdd extends JDialog {
+public class ProdutoAddDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtId;
@@ -28,7 +28,7 @@ public class ProdutoAdd extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			ProdutoAdd dialog = new ProdutoAdd();
+			ProdutoAddDialog dialog = new ProdutoAddDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -39,7 +39,7 @@ public class ProdutoAdd extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ProdutoAdd() {
+	public ProdutoAddDialog() {
 		setAlwaysOnTop(true);
 		setModal(true);
 		setBounds(100, 100, 450, 300);

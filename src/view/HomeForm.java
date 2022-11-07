@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 import model.Produto;
 import model.TableModelProduto;
 
-public class Home extends JFrame {
+public class HomeForm extends JFrame {
 
 	/* VARIAVEIS */
 	int xx, xy;
@@ -75,7 +75,7 @@ public class Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Home() {
+	public HomeForm() {
 
 		pn_configuracao.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
 		lbl_fechar.setBounds(1156, 12, 32, 32);
@@ -258,7 +258,7 @@ public class Home extends JFrame {
 
 		JLabel lblLogotipo = new JLabel("");
 		lblLogotipo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogotipo.setIcon(new ImageIcon(Home.class.getResource("/img/java32.png")));
+		lblLogotipo.setIcon(new ImageIcon(HomeForm.class.getResource("/img/java32.png")));
 		lblLogotipo.setBounds(12, 12, 165, 31);
 		pn_sidebar.add(lblLogotipo);
 		ps_home.addMouseListener(new MouseAdapter() {
@@ -287,7 +287,7 @@ public class Home extends JFrame {
 				System.exit(0); // desliga o aplicativo
 			}
 		});
-		lbl_fechar.setIcon(new ImageIcon(Home.class.getResource("/img/close32.png")));
+		lbl_fechar.setIcon(new ImageIcon(HomeForm.class.getResource("/img/close32.png")));
 		contentPane.add(lbl_fechar);
 
 		lblTitulo.setForeground(Color.WHITE);
@@ -321,7 +321,7 @@ public class Home extends JFrame {
 		JButton btnProduto = new JButton("PRODUTO");
 		btnProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProdutoAdd pd = new ProdutoAdd();
+				ProdutoAddDialog pd = new ProdutoAddDialog();
 				pd.setVisible(true);
 
 				salvar(pd.r(), pd.n());
@@ -334,7 +334,7 @@ public class Home extends JFrame {
 		layeredPane.add(panel_4);
 		panel_4.setLayout(null);
 		lblConfig.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConfig.setIcon(new ImageIcon(Home.class.getResource("/img/java512.png")));
+		lblConfig.setIcon(new ImageIcon(HomeForm.class.getResource("/img/java512.png")));
 		lblConfig.setBounds(12, 12, 963, 508);
 		
 		panel_4.add(lblConfig);

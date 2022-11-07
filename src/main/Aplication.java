@@ -2,7 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 
-import view.Home;
+import view.HomeForm;
 
 public class Aplication {
 
@@ -14,7 +14,7 @@ public class Aplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Home frame = new Home();
+					HomeForm frame = new HomeForm();
 					frame.setLocationRelativeTo(null);
 //					frame.chamaProduto();
 					frame.setVisible(true);

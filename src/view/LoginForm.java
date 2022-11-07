@@ -20,7 +20,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Login extends JFrame {
+public class LoginForm extends JFrame {
 
 	private JPanel contentPane;
 	int xx, xy;
@@ -34,7 +34,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					LoginForm frame = new LoginForm();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +46,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public LoginForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		setOpacity(0.1f);
@@ -80,7 +80,7 @@ public class Login extends JFrame {
 				System.exit(0); // desliga o aplicativo
 			}
 		});
-		lbl_fechar.setIcon(new ImageIcon(Login.class.getResource("/img/close32.png")));
+		lbl_fechar.setIcon(new ImageIcon(LoginForm.class.getResource("/img/close32.png")));
 		lbl_fechar.setBounds(727, 12, 32, 32);
 		contentPane.add(lbl_fechar);
 
@@ -109,7 +109,7 @@ public class Login extends JFrame {
 		JButton btnNewButton = new JButton("LOGAR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Home home = new Home();
+				HomeForm home = new HomeForm();
 				home.setLocationRelativeTo(null);
 				home.setVisible(true);
 				dispose();
@@ -123,7 +123,7 @@ public class Login extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/img/java256-2.png")));
+		lblNewLabel.setIcon(new ImageIcon(LoginForm.class.getResource("/img/java256-2.png")));
 		lblNewLabel.setBounds(12, 56, 390, 267);
 		contentPane.add(lblNewLabel);
 
