@@ -25,6 +25,9 @@ import javax.swing.SwingConstants;
 
 import model.Produto;
 import model.TableModelProduto;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JSlider;
 
 public class HomeForm extends JFrame {
 
@@ -70,7 +73,9 @@ public class HomeForm extends JFrame {
 	private final JTextPane txtNome = new JTextPane();
 	private final JButton btnAdicionar = new JButton("adicionar");
 	private final JButton btnRemover = new JButton("remover");
-	private final JLabel lblConfig = new JLabel("");
+	private final JLabel lblBtnCfop = new JLabel("Cfop");
+	private final JLabel lblBtnNcm = new JLabel("Ncm");
+	private JLabel lblBtnUnidade;
 
 	/**
 	 * Create the frame.
@@ -93,6 +98,7 @@ public class HomeForm extends JFrame {
 		lbl_relatorio.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
 		lbl_cadastro.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
 		lbl_configuracao.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
+		pn_configuracao.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
 
 		setUndecorated(true);
 		setOpacity(0.1f);
@@ -336,6 +342,49 @@ public class HomeForm extends JFrame {
 //				modelProduto.addProduto(p);
 			}
 		});
+		panel_4.setBackground(new Color(155, 0, 0));
+		panel_4.setBounds(0, 0, 987, 532);
+		layeredPane.add(panel_4);
+		panel_4.setLayout(null);
+				
+				lblBtnUnidade = new JLabel("Unidade");
+				lblBtnUnidade.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				lblBtnUnidade.setVerticalTextPosition(SwingConstants.BOTTOM);
+				lblBtnUnidade.setHorizontalTextPosition(SwingConstants.CENTER);
+				lblBtnUnidade.setHorizontalAlignment(SwingConstants.CENTER);
+				lblBtnUnidade.setIcon(new ImageIcon(HomeForm.class.getResource("/img/a-medida128.png")));
+				lblBtnUnidade.setForeground(Color.WHITE);
+				lblBtnUnidade.setBounds(23, 56, 300, 201);
+				panel_4.add(lblBtnUnidade);
+				
+				JLabel lblCadastros = new JLabel("Cadastros");
+				lblCadastros.setHorizontalAlignment(SwingConstants.CENTER);
+				lblCadastros.setForeground(Color.WHITE);
+				lblCadastros.setFont(new Font("Dialog", Font.BOLD, 20));
+				lblCadastros.setBounds(23, 12, 166, 32);
+				panel_4.add(lblCadastros);
+				lblBtnCfop.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128-2.png")));
+				lblBtnCfop.setVerticalTextPosition(SwingConstants.BOTTOM);
+				lblBtnCfop.setHorizontalTextPosition(SwingConstants.CENTER);
+				lblBtnCfop.setHorizontalAlignment(SwingConstants.CENTER);
+				lblBtnCfop.setForeground(Color.WHITE);
+				lblBtnCfop.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				lblBtnCfop.setBounds(335, 56, 300, 201);
+				
+				panel_4.add(lblBtnCfop);
+				lblBtnNcm.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128.png")));
+				lblBtnNcm.setVerticalTextPosition(SwingConstants.BOTTOM);
+				lblBtnNcm.setHorizontalTextPosition(SwingConstants.CENTER);
+				lblBtnNcm.setHorizontalAlignment(SwingConstants.CENTER);
+				lblBtnNcm.setForeground(Color.WHITE);
+				lblBtnNcm.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				lblBtnNcm.setBounds(647, 56, 300, 201);
+				
+				panel_4.add(lblBtnNcm);
+				
+				JSlider slider = new JSlider();
+				slider.setBounds(23, 504, 200, 16);
+				panel_4.add(slider);
 		btnProduto.setBounds(141, 12, 117, 25);
 		panel_1.add(btnProduto);
 		textField = new JTextField();
@@ -386,18 +435,11 @@ public class HomeForm extends JFrame {
 		panel_3.setBackground(new Color(0, 155, 0));
 		panel_3.setBounds(0, 0, 987, 532);
 		layeredPane.add(panel_3);
-		panel_4.setBackground(new Color(155, 0, 0));
-		panel_4.setBounds(0, 0, 987, 532);
-		layeredPane.add(panel_4);
-		panel_4.setLayout(null);
-		lblConfig.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConfig.setIcon(new ImageIcon(HomeForm.class.getResource("/img/java512.png")));
-		lblConfig.setBounds(12, 12, 963, 508);
-
-		panel_4.add(lblConfig);
 
 		/**/
-//		chamaProduto();
+
+		
+		//		chamaProduto();
 		ativaPainel0();
 	}
 
