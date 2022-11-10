@@ -49,7 +49,7 @@ public class LoginForm extends JFrame {
 	public LoginForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
-		setOpacity(0.1f);
+		setOpacity(0.8f);
 		setBounds(100, 100, 771, 335);
 		setBackground(new Color(0, 0, 0, 30));
 		contentPane = new JPanel();
