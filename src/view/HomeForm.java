@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.text.BreakIterator;
+import java.lang.reflect.Executable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,26 +18,20 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
 
+import controller.HomeController;
 import model.Produto;
 import model.TableModelProduto;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JSlider;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import javax.swing.JSpinner;
-import javax.swing.border.LineBorder;
-import java.awt.Rectangle;
-import javax.swing.UIManager;
 
 public class HomeForm extends JFrame {
+
+	private final HomeController controller;
 
 	/* VARIAVEIS */
 	int xx, xy;
@@ -115,6 +109,7 @@ public class HomeForm extends JFrame {
 	 * Create the frame.
 	 */
 	public HomeForm() {
+		controller = new HomeController(this);
 
 		pn_configuracao.setCursor(new Cursor(Cursor.HAND_CURSOR)); // mudar o cursor do mouse
 		lbl_fechar.setBounds(1156, 12, 32, 32);
@@ -394,252 +389,261 @@ public class HomeForm extends JFrame {
 				panel_conteiner_unidade.setBackground(corFundoMenuFoco);
 				lblBtnUnidade.setForeground(Color.white);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panel_conteiner_unidade.setBackground(corFundoMenu);
 				lblBtnUnidade.setForeground(Color.black);
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.executa();
+			}
 		});
 		panel_conteiner_unidade.setBounds(12, 100, 226, 200);
 		panel_conteiner_unidade.setBackground(corFundoMenu);
 		panel_cadastro.add(panel_conteiner_unidade);
-				panel_conteiner_unidade.setLayout(null);
-		
-				lblBtnUnidade = new JLabel("Unidade");
-				lblBtnUnidade.setBounds(0, 0, 226, 200);
-				panel_conteiner_unidade.add(lblBtnUnidade);
-				lblBtnUnidade.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				
-						lblBtnUnidade.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-						lblBtnUnidade.setVerticalTextPosition(SwingConstants.BOTTOM);
-						lblBtnUnidade.setHorizontalTextPosition(SwingConstants.CENTER);
-						lblBtnUnidade.setHorizontalAlignment(SwingConstants.CENTER);
-						lblBtnUnidade.setIcon(new ImageIcon(HomeForm.class.getResource("/img/a-medida128.png")));
-						lblBtnUnidade.setForeground(Color.WHITE);
-						panel_conteiner_cfop.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								panel_conteiner_cfop.setBackground(corFundoMenuFoco);
-								lblBtnCfop.setForeground(Color.white);
-							}
-							@Override
-							public void mouseExited(MouseEvent e) {
-								panel_conteiner_cfop.setBackground(corFundoMenu);
-								lblBtnCfop.setForeground(Color.black);
-							}
-						});
-						panel_conteiner_cfop.setBounds(253, 100, 229, 200);
-						
-						panel_cadastro.add(panel_conteiner_cfop);
-						panel_conteiner_cfop.setLayout(null);
-						lblBtnCfop.setBounds(0, 0, 229, 200);
-						panel_conteiner_cfop.setBackground(corFundoMenu);
-						panel_conteiner_cfop.add(lblBtnCfop);
-						lblBtnCfop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-						lblBtnCfop.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128-2.png")));
-						lblBtnCfop.setVerticalTextPosition(SwingConstants.BOTTOM);
-						lblBtnCfop.setHorizontalTextPosition(SwingConstants.CENTER);
-						lblBtnCfop.setHorizontalAlignment(SwingConstants.CENTER);
-						lblBtnCfop.setForeground(Color.WHITE);
-						lblBtnCfop.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-						panel_conteiner_ncm.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								panel_conteiner_ncm.setBackground(corFundoMenuFoco);
-								lblBtnNcm.setForeground(Color.white);
-							}
-							@Override
-							public void mouseExited(MouseEvent e) {
-								panel_conteiner_ncm.setBackground(corFundoMenu);
-								lblBtnNcm.setForeground(Color.black);
-							}
-						});
-						panel_conteiner_ncm.setLayout(null);
-						panel_conteiner_ncm.setBounds(495, 100, 229, 200);
-						panel_conteiner_ncm.setBackground(corFundoMenu);
-						panel_cadastro.add(panel_conteiner_ncm);
-						lblBtnNcm.setBounds(0, 0, 229, 200);
-						panel_conteiner_ncm.add(lblBtnNcm);
-						lblBtnNcm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-						lblBtnNcm.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128.png")));
-						lblBtnNcm.setVerticalTextPosition(SwingConstants.BOTTOM);
-						lblBtnNcm.setHorizontalTextPosition(SwingConstants.CENTER);
-						lblBtnNcm.setHorizontalAlignment(SwingConstants.CENTER);
-						lblBtnNcm.setForeground(Color.WHITE);
-						lblBtnNcm.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-						panel_conteiner_empresa.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								panel_conteiner_empresa.setBackground(corFundoMenuFoco);
-								lblBtnEmpresa.setForeground(Color.white);
-							}
-							@Override
-							public void mouseExited(MouseEvent e) {
-								panel_conteiner_empresa.setBackground(corFundoMenu);
-								lblBtnEmpresa.setForeground(Color.black);
-							}
-						});
-						panel_conteiner_empresa.setLayout(null);
-						panel_conteiner_empresa.setBounds(736, 100, 229, 200);
-						panel_conteiner_empresa.setBackground(corFundoMenu);
-						panel_cadastro.add(panel_conteiner_empresa);
-						lblBtnEmpresa.setBounds(0, 0, 229, 200);
-						panel_conteiner_empresa.add(lblBtnEmpresa);
-						lblBtnEmpresa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-						lblBtnEmpresa.setIcon(new ImageIcon(HomeForm.class.getResource("/img/companhia128.png")));
-						lblBtnEmpresa.setVerticalTextPosition(SwingConstants.BOTTOM);
-						lblBtnEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
-						lblBtnEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-						lblBtnEmpresa.setForeground(Color.WHITE);
-						lblBtnEmpresa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		
-				panel_config.setBackground(corFundoMenu);
-				panel_config.setBounds(0, 0, 987, 532);
-				layeredPane.add(panel_config);
-				panel_config.setLayout(null);
-				
-						panel_cor_principal.setBackground(corFundoMenu);
-						panel_cor_principal.setBounds(163, 151, 300, 249);
-						panel_config.add(panel_cor_principal);
-						panel_cor_principal.setLayout(null);
-						lblPnCorPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
-						lblPnCorPrincipal.setForeground(Color.WHITE);
-						lblPnCorPrincipal.setFont(new Font("Dialog", Font.BOLD, 20));
-						lblPnCorPrincipal.setBounds(12, 12, 276, 32);
-						
-								panel_cor_principal.add(lblPnCorPrincipal);
-								lblVermelho.setForeground(Color.WHITE);
-								lblVermelho.setBounds(12, 56, 276, 15);
-								
-										panel_cor_principal.add(lblVermelho);
-										lblVerde.setForeground(Color.WHITE);
-										lblVerde.setBounds(12, 101, 276, 15);
-										
-												panel_cor_principal.add(lblVerde);
-												lblAzul.setForeground(Color.WHITE);
-												lblAzul.setBounds(12, 153, 276, 15);
-												
-														panel_cor_principal.add(lblAzul);
-														lblTrasnparencia.setForeground(Color.WHITE);
-														lblTrasnparencia.setBounds(12, 201, 276, 15);
-														
-																panel_cor_principal.add(lblTrasnparencia);
-																slider_prin_trans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																
-																		slider_prin_trans.setBounds(12, 228, 200, 16);
-																		slider_prin_trans.setBackground(corFundoMenu);
-																		panel_cor_principal.add(slider_prin_trans);
-																		slider_prin_trans.addMouseListener(new MouseAdapter() {
-																			@Override
-																			public void mouseReleased(MouseEvent e) {
-																				alteraCorPrincipal();
-																			}
-																		});
-																		slider_prin_trans.setMaximum(255);
-																		slider_Prin_verm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																		slider_Prin_verm.addMouseListener(new MouseAdapter() {
-																			@Override
-																			public void mouseReleased(MouseEvent e) {
-																				alteraCorPrincipal();
-																			}
-																		});
-																		
-																				slider_Prin_verm.setBackground(Color.BLACK);
-																				slider_Prin_verm.setMaximum(255);
-																				slider_Prin_verm.setBounds(12, 73, 200, 16);
-																				slider_Prin_verm.setBackground(corFundoMenu);
-																				panel_cor_principal.add(slider_Prin_verm);
-																				slider_Prin_verd.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																				slider_Prin_verd.addMouseListener(new MouseAdapter() {
-																					@Override
-																					public void mouseReleased(MouseEvent e) {
-																						alteraCorPrincipal();
-																					}
-																				});
-																				slider_Prin_verd.setMaximum(255);
-																				slider_Prin_verd.setBounds(12, 125, 200, 16);
-																				slider_Prin_verd.setBackground(corFundoMenu);
-																				
-																						panel_cor_principal.add(slider_Prin_verd);
-																						slider_prin_azul.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																						slider_prin_azul.addMouseListener(new MouseAdapter() {
-																							@Override
-																							public void mouseReleased(MouseEvent e) {
-																								alteraCorPrincipal();
-																							}
-																						});
-																						slider_prin_azul.setMaximum(255);
-																						slider_prin_azul.setBounds(12, 173, 200, 16);
-																						slider_prin_azul.setBackground(corFundoMenu);
-																						panel_cor_principal.add(slider_prin_azul);
-																						panel_cor_principal_1.setLayout(null);
-																						panel_cor_principal_1.setBackground(corFundoMenu);
-																						panel_cor_principal_1.setBounds(475, 151, 300, 249);
-																						
-																								panel_config.add(panel_cor_principal_1);
-																								lblCorMenu.setHorizontalAlignment(SwingConstants.CENTER);
-																								lblCorMenu.setForeground(Color.WHITE);
-																								lblCorMenu.setFont(new Font("Dialog", Font.BOLD, 20));
-																								lblCorMenu.setBounds(12, 12, 276, 32);
-																								
-																										panel_cor_principal_1.add(lblCorMenu);
-																										lblVermelho_1.setForeground(Color.WHITE);
-																										lblVermelho_1.setBounds(12, 56, 276, 15);
-																										
-																												panel_cor_principal_1.add(lblVermelho_1);
-																												lblVerde_1.setForeground(Color.WHITE);
-																												lblVerde_1.setBounds(12, 101, 276, 15);
-																												
-																														panel_cor_principal_1.add(lblVerde_1);
-																														lblAzul_1.setForeground(Color.WHITE);
-																														lblAzul_1.setBounds(12, 153, 276, 15);
-																														
-																																panel_cor_principal_1.add(lblAzul_1);
-																																slider_Prin_verm_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																																slider_Prin_verm_1.addMouseListener(new MouseAdapter() {
-																																	@Override
-																																	public void mouseReleased(MouseEvent e) {
-																																		alteraCorMenu();
-																																	}
-																																});
-																																slider_Prin_verm_1.setMaximum(255);
-																																slider_Prin_verm_1.setBackground(corFundoMenu);
-																																slider_Prin_verm_1.setValue(153);
-																																slider_Prin_verm_1.setBounds(12, 73, 200, 16);
-																																
-																																		panel_cor_principal_1.add(slider_Prin_verm_1);
-																																		slider_Prin_verd_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																																		slider_Prin_verd_1.addMouseListener(new MouseAdapter() {
-																																			@Override
-																																			public void mouseReleased(MouseEvent e) {
-																																				alteraCorMenu();
-																																			}
-																																		});
-																																		slider_Prin_verd_1.setMaximum(255);
-																																		slider_Prin_verd_1.setBackground(corFundoMenu);
-																																		slider_Prin_verd_1.setValue(193);
-																																		slider_Prin_verd_1.setBounds(12, 125, 200, 16);
-																																		
-																																				panel_cor_principal_1.add(slider_Prin_verd_1);
-																																				slider_prin_azul_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																																				slider_prin_azul_1.addMouseListener(new MouseAdapter() {
-																																					@Override
-																																					public void mouseReleased(MouseEvent e) {
-																																						alteraCorMenu();
-																																					}
-																																				});
-																																				slider_prin_azul_1.setMaximum(255);
-																																				slider_prin_azul_1.setBackground(corFundoMenu);
-																																				slider_prin_azul_1.setValue(241);
-																																				slider_prin_azul_1.setBounds(12, 173, 200, 16);
-																																				
-																																						panel_cor_principal_1.add(slider_prin_azul_1);
-																																						lblConfiguracoes.setHorizontalAlignment(SwingConstants.CENTER);
-																																						lblConfiguracoes.setForeground(Color.WHITE);
-																																						lblConfiguracoes.setFont(new Font("Dialog", Font.BOLD, 20));
-																																						lblConfiguracoes.setBounds(12, 12, 276, 32);
-																																						
-																																								panel_config.add(lblConfiguracoes);
+		panel_conteiner_unidade.setLayout(null);
+
+		lblBtnUnidade = new JLabel("Unidade");
+		lblBtnUnidade.setBounds(0, 0, 226, 200);
+		panel_conteiner_unidade.add(lblBtnUnidade);
+		lblBtnUnidade.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		lblBtnUnidade.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblBtnUnidade.setVerticalTextPosition(SwingConstants.BOTTOM);
+		lblBtnUnidade.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblBtnUnidade.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBtnUnidade.setIcon(new ImageIcon(HomeForm.class.getResource("/img/a-medida128.png")));
+		lblBtnUnidade.setForeground(Color.WHITE);
+		panel_conteiner_cfop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				panel_conteiner_cfop.setBackground(corFundoMenuFoco);
+				lblBtnCfop.setForeground(Color.white);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_conteiner_cfop.setBackground(corFundoMenu);
+				lblBtnCfop.setForeground(Color.black);
+			}
+		});
+		panel_conteiner_cfop.setBounds(253, 100, 229, 200);
+
+		panel_cadastro.add(panel_conteiner_cfop);
+		panel_conteiner_cfop.setLayout(null);
+		lblBtnCfop.setBounds(0, 0, 229, 200);
+		panel_conteiner_cfop.setBackground(corFundoMenu);
+		panel_conteiner_cfop.add(lblBtnCfop);
+		lblBtnCfop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBtnCfop.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128-2.png")));
+		lblBtnCfop.setVerticalTextPosition(SwingConstants.BOTTOM);
+		lblBtnCfop.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblBtnCfop.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBtnCfop.setForeground(Color.WHITE);
+		lblBtnCfop.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_conteiner_ncm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				panel_conteiner_ncm.setBackground(corFundoMenuFoco);
+				lblBtnNcm.setForeground(Color.white);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_conteiner_ncm.setBackground(corFundoMenu);
+				lblBtnNcm.setForeground(Color.black);
+			}
+		});
+		panel_conteiner_ncm.setLayout(null);
+		panel_conteiner_ncm.setBounds(495, 100, 229, 200);
+		panel_conteiner_ncm.setBackground(corFundoMenu);
+		panel_cadastro.add(panel_conteiner_ncm);
+		lblBtnNcm.setBounds(0, 0, 229, 200);
+		panel_conteiner_ncm.add(lblBtnNcm);
+		lblBtnNcm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBtnNcm.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128.png")));
+		lblBtnNcm.setVerticalTextPosition(SwingConstants.BOTTOM);
+		lblBtnNcm.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblBtnNcm.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBtnNcm.setForeground(Color.WHITE);
+		lblBtnNcm.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_conteiner_empresa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				panel_conteiner_empresa.setBackground(corFundoMenuFoco);
+				lblBtnEmpresa.setForeground(Color.white);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_conteiner_empresa.setBackground(corFundoMenu);
+				lblBtnEmpresa.setForeground(Color.black);
+			}
+		});
+		panel_conteiner_empresa.setLayout(null);
+		panel_conteiner_empresa.setBounds(736, 100, 229, 200);
+		panel_conteiner_empresa.setBackground(corFundoMenu);
+		panel_cadastro.add(panel_conteiner_empresa);
+		lblBtnEmpresa.setBounds(0, 0, 229, 200);
+		panel_conteiner_empresa.add(lblBtnEmpresa);
+		lblBtnEmpresa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBtnEmpresa.setIcon(new ImageIcon(HomeForm.class.getResource("/img/companhia128.png")));
+		lblBtnEmpresa.setVerticalTextPosition(SwingConstants.BOTTOM);
+		lblBtnEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblBtnEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBtnEmpresa.setForeground(Color.WHITE);
+		lblBtnEmpresa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+
+		panel_config.setBackground(corFundoMenu);
+		panel_config.setBounds(0, 0, 987, 532);
+		layeredPane.add(panel_config);
+		panel_config.setLayout(null);
+
+		panel_cor_principal.setBackground(corFundoMenu);
+		panel_cor_principal.setBounds(163, 151, 300, 249);
+		panel_config.add(panel_cor_principal);
+		panel_cor_principal.setLayout(null);
+		lblPnCorPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPnCorPrincipal.setForeground(Color.WHITE);
+		lblPnCorPrincipal.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblPnCorPrincipal.setBounds(12, 12, 276, 32);
+
+		panel_cor_principal.add(lblPnCorPrincipal);
+		lblVermelho.setForeground(Color.WHITE);
+		lblVermelho.setBounds(12, 56, 276, 15);
+
+		panel_cor_principal.add(lblVermelho);
+		lblVerde.setForeground(Color.WHITE);
+		lblVerde.setBounds(12, 101, 276, 15);
+
+		panel_cor_principal.add(lblVerde);
+		lblAzul.setForeground(Color.WHITE);
+		lblAzul.setBounds(12, 153, 276, 15);
+
+		panel_cor_principal.add(lblAzul);
+		lblTrasnparencia.setForeground(Color.WHITE);
+		lblTrasnparencia.setBounds(12, 201, 276, 15);
+
+		panel_cor_principal.add(lblTrasnparencia);
+		slider_prin_trans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_prin_trans.setBounds(12, 228, 200, 16);
+		slider_prin_trans.setBackground(corFundoMenu);
+		panel_cor_principal.add(slider_prin_trans);
+		slider_prin_trans.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorPrincipal();
+			}
+		});
+		slider_prin_trans.setMaximum(255);
+		slider_Prin_verm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		slider_Prin_verm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorPrincipal();
+			}
+		});
+
+		slider_Prin_verm.setBackground(Color.BLACK);
+		slider_Prin_verm.setMaximum(255);
+		slider_Prin_verm.setBounds(12, 73, 200, 16);
+		slider_Prin_verm.setBackground(corFundoMenu);
+		panel_cor_principal.add(slider_Prin_verm);
+		slider_Prin_verd.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		slider_Prin_verd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorPrincipal();
+			}
+		});
+		slider_Prin_verd.setMaximum(255);
+		slider_Prin_verd.setBounds(12, 125, 200, 16);
+		slider_Prin_verd.setBackground(corFundoMenu);
+
+		panel_cor_principal.add(slider_Prin_verd);
+		slider_prin_azul.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		slider_prin_azul.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorPrincipal();
+			}
+		});
+		slider_prin_azul.setMaximum(255);
+		slider_prin_azul.setBounds(12, 173, 200, 16);
+		slider_prin_azul.setBackground(corFundoMenu);
+		panel_cor_principal.add(slider_prin_azul);
+		panel_cor_principal_1.setLayout(null);
+		panel_cor_principal_1.setBackground(corFundoMenu);
+		panel_cor_principal_1.setBounds(475, 151, 300, 249);
+
+		panel_config.add(panel_cor_principal_1);
+		lblCorMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCorMenu.setForeground(Color.WHITE);
+		lblCorMenu.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCorMenu.setBounds(12, 12, 276, 32);
+
+		panel_cor_principal_1.add(lblCorMenu);
+		lblVermelho_1.setForeground(Color.WHITE);
+		lblVermelho_1.setBounds(12, 56, 276, 15);
+
+		panel_cor_principal_1.add(lblVermelho_1);
+		lblVerde_1.setForeground(Color.WHITE);
+		lblVerde_1.setBounds(12, 101, 276, 15);
+
+		panel_cor_principal_1.add(lblVerde_1);
+		lblAzul_1.setForeground(Color.WHITE);
+		lblAzul_1.setBounds(12, 153, 276, 15);
+
+		panel_cor_principal_1.add(lblAzul_1);
+		slider_Prin_verm_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		slider_Prin_verm_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorMenu();
+			}
+		});
+		slider_Prin_verm_1.setMaximum(255);
+		slider_Prin_verm_1.setBackground(corFundoMenu);
+		slider_Prin_verm_1.setValue(153);
+		slider_Prin_verm_1.setBounds(12, 73, 200, 16);
+
+		panel_cor_principal_1.add(slider_Prin_verm_1);
+		slider_Prin_verd_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		slider_Prin_verd_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorMenu();
+			}
+		});
+		slider_Prin_verd_1.setMaximum(255);
+		slider_Prin_verd_1.setBackground(corFundoMenu);
+		slider_Prin_verd_1.setValue(193);
+		slider_Prin_verd_1.setBounds(12, 125, 200, 16);
+
+		panel_cor_principal_1.add(slider_Prin_verd_1);
+		slider_prin_azul_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		slider_prin_azul_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				alteraCorMenu();
+			}
+		});
+		slider_prin_azul_1.setMaximum(255);
+		slider_prin_azul_1.setBackground(corFundoMenu);
+		slider_prin_azul_1.setValue(241);
+		slider_prin_azul_1.setBounds(12, 173, 200, 16);
+
+		panel_cor_principal_1.add(slider_prin_azul_1);
+		lblConfiguracoes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConfiguracoes.setForeground(Color.WHITE);
+		lblConfiguracoes.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblConfiguracoes.setBounds(12, 12, 276, 32);
+
+		panel_config.add(lblConfiguracoes);
 
 		panel_2.setBackground(new Color(0, 255, 0));
 		panel_2.setBounds(0, 0, 987, 532);
@@ -731,9 +735,9 @@ public class HomeForm extends JFrame {
 		slider_Prin_verd.setBackground(corFundoMenu);
 		slider_prin_azul.setBackground(corFundoMenu);
 		slider_prin_trans.setBackground(corFundoMenu);
-		
+
 		panel_cadastro.setBackground(corFundoMenu);
-		
+
 		panel_conteiner_unidade.setBackground(corFundoMenu);
 		panel_conteiner_cfop.setBackground(corFundoMenu);
 		panel_conteiner_ncm.setBackground(corFundoMenu);
@@ -759,38 +763,31 @@ public class HomeForm extends JFrame {
 		System.out.println("salvando....");
 	}
 
-	public void desativaPainel() {
-		panel_0.setVisible(!true);
-		panel_1.setVisible(!true);
-		panel_2.setVisible(!true);
-		panel_cadastro.setVisible(!true);
-		panel_config.setVisible(!true);
-
-	}
+	 
 
 	public void ativaPainel0() {
-		desativaPainel();
+		controller.desativaPainel();
 		panel_0.setVisible(true);
 //		ativaPainel4();
 	}
 
 	public void ativaPainel1() {
-		desativaPainel();
+		controller.desativaPainel();
 		panel_1.setVisible(true);
 	}
 
 	private void ativaPainel2() {
-		desativaPainel();
+		controller.desativaPainel();
 		panel_2.setVisible(true);
 	}
 
 	private void ativaPainel3() {
-		desativaPainel();
+		controller.desativaPainel();
 		panel_cadastro.setVisible(true);
 	}
 
 	private void ativaPainel4() {
-		desativaPainel();
+		controller.desativaPainel();
 		panel_config.setVisible(true);
 	}
 
@@ -804,4 +801,47 @@ public class HomeForm extends JFrame {
 		int y = arg0.getYOnScreen();
 		this.setLocation(x - xx, y - xy);
 	}
+
+	public JPanel getPanel_0() {
+		return panel_0;
+	}
+
+	public void setPanel_0(JPanel panel_0) {
+		this.panel_0 = panel_0;
+	}
+
+	public JPanel getPanel_1() {
+		return panel_1;
+	}
+
+	public void setPanel_1(JPanel panel_1) {
+		this.panel_1 = panel_1;
+	}
+
+	public JPanel getPanel_2() {
+		return panel_2;
+	}
+
+	public void setPanel_2(JPanel panel_2) {
+		this.panel_2 = panel_2;
+	}
+
+	public JPanel getPanel_cadastro() {
+		return panel_cadastro;
+	}
+
+	public void setPanel_cadastro(JPanel panel_cadastro) {
+		this.panel_cadastro = panel_cadastro;
+	}
+
+	public JPanel getPanel_config() {
+		return panel_config;
+	}
+
+	public void setPanel_config(JPanel panel_config) {
+		this.panel_config = panel_config;
+	}
+
+ 
+	
 }
