@@ -104,7 +104,7 @@ public class HomeForm extends JFrame {
 	private final JSlider slider_Prin_verm_1 = new JSlider();
 	private final JSlider slider_Prin_verd_1 = new JSlider();
 	private final JSlider slider_prin_azul_1 = new JSlider();
-	private final JLabel lblBtnEmpresa = new JLabel("Ncm");
+	private final JLabel lblBtnEmpresa = new JLabel("Empresas");
 	private final JLabel lblConfiguracoes = new JLabel("Configurações");
 	private final JPanel panel_conteiner_unidade = new JPanel();
 	private final JPanel panel_conteiner_cfop = new JPanel();
@@ -486,7 +486,7 @@ public class HomeForm extends JFrame {
 						lblBtnEmpresa.setBounds(0, 0, 229, 200);
 						panel_conteiner_empresa.add(lblBtnEmpresa);
 						lblBtnEmpresa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-						lblBtnEmpresa.setIcon(new ImageIcon(HomeForm.class.getResource("/img/impostos128.png")));
+						lblBtnEmpresa.setIcon(new ImageIcon(HomeForm.class.getResource("/img/companhia128.png")));
 						lblBtnEmpresa.setVerticalTextPosition(SwingConstants.BOTTOM);
 						lblBtnEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
 						lblBtnEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
