@@ -346,12 +346,7 @@ public class HomeForm extends JFrame {
 		tabela();
 		table_1 = new JTable(modelProduto); // ver se vai dar erro
 		table_1.getTableHeader().setReorderingAllowed(false);
-		scrollPane = new JScrollPane(table_1);
-
-		// panel_0.setBounds(0, 0, 987, 532);
-		// panel_0.setBackground(new Color(47, 79, 79));
-		// panel_0.setLayout(null);
-		// layeredPane.add(panel_0);
+		scrollPane = new JScrollPane(table_1); 
 
 		panel_1.setBackground(new Color(255, 0, 255));
 		panel_1.setBounds(0, 0, 987, 532);
@@ -543,7 +538,7 @@ public class HomeForm extends JFrame {
 		slider_prin_trans.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorPrincipal();
+				controller.alteraCorPrincipal();
 			}
 		});
 		slider_prin_trans.setMaximum(255);
@@ -551,7 +546,7 @@ public class HomeForm extends JFrame {
 		slider_Prin_verm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorPrincipal();
+				controller.alteraCorPrincipal();
 			}
 		});
 
@@ -564,7 +559,7 @@ public class HomeForm extends JFrame {
 		slider_Prin_verd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorPrincipal();
+				controller.alteraCorPrincipal();
 			}
 		});
 		slider_Prin_verd.setMaximum(255);
@@ -576,7 +571,7 @@ public class HomeForm extends JFrame {
 		slider_prin_azul.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorPrincipal();
+				controller.alteraCorPrincipal();
 			}
 			
 		});
@@ -712,15 +707,7 @@ public class HomeForm extends JFrame {
 		panel_0.setVisible(true);
 	}
 
-	public void alteraCorPrincipal() {
-		r = ((slider_Prin_verm.getValue()));
-		g = ((slider_Prin_verd.getValue()));
-		b = ((slider_prin_azul.getValue()));
-		a = ((slider_prin_trans.getValue()));
-		corPrincipal = new Color(r, g, b, a);
-		setBackground(corPrincipal);
-		System.out.println(a);
-	}
+	 
 
 	 
 

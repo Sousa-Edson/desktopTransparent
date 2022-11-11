@@ -74,6 +74,7 @@ public class HomeController {
 		view.getPanel_conteiner_cfop().setBackground(corFundoMenu);
 		view.getPanel_conteiner_ncm().setBackground(corFundoMenu);
 		view.getPanel_conteiner_empresa().setBackground(corFundoMenu);
+		view.getCorFundoMenu().getColor("green");
 	}
     
 }
