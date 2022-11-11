@@ -28,6 +28,8 @@ import javax.swing.border.EtchedBorder;
 import controller.HomeController;
 import model.Produto;
 import model.TableModelProduto;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class HomeForm extends JFrame {
 
@@ -576,6 +578,7 @@ public class HomeForm extends JFrame {
 			public void mouseReleased(MouseEvent e) {
 				alteraCorPrincipal();
 			}
+			
 		});
 		slider_prin_azul.setMaximum(255);
 		slider_prin_azul.setBounds(12, 173, 200, 16);
@@ -604,11 +607,15 @@ public class HomeForm extends JFrame {
 		lblAzul_1.setBounds(12, 153, 276, 15);
 
 		panel_cor_principal_1.add(lblAzul_1);
+		slider_Prin_verm_1.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+			}
+		});
 		slider_Prin_verm_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		slider_Prin_verm_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorMenu();
+				controller.alteraCorMenu();
 			}
 		});
 		slider_Prin_verm_1.setMaximum(255);
@@ -621,7 +628,7 @@ public class HomeForm extends JFrame {
 		slider_Prin_verd_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorMenu();
+				controller.alteraCorMenu();
 			}
 		});
 		slider_Prin_verd_1.setMaximum(255);
@@ -634,7 +641,7 @@ public class HomeForm extends JFrame {
 		slider_prin_azul_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				alteraCorMenu();
+				controller.alteraCorMenu();
 			}
 		});
 		slider_prin_azul_1.setMaximum(255);
@@ -715,41 +722,7 @@ public class HomeForm extends JFrame {
 		System.out.println(a);
 	}
 
-	public void alteraCorMenu() {
-		rm = ((slider_Prin_verm_1.getValue()));
-		gm = ((slider_Prin_verd_1.getValue()));
-		bm = ((slider_prin_azul_1.getValue()));
-
-		corFundoMenu = new Color(rm, gm, bm, am);
-		pn_configuracao.setBackground(corFundoMenu);
-		pn_sidebar.setBackground(corFundoMenu);
-		panel_config.setBackground(corFundoMenu);
-
-		pn_home.setBackground(corFundoMenu);
-		pn_produto.setBackground(corFundoMenu);
-		pn_relatorio.setBackground(corFundoMenu);
-		pn_cadastro.setBackground(corFundoMenu);
-		pn_configuracao.setBackground(corFundoMenu);
-
-		panel_cor_principal_1.setBackground(corFundoMenu);
-		panel_cor_principal.setBackground(corFundoMenu);
-
-		slider_Prin_verm_1.setBackground(corFundoMenu);
-		slider_Prin_verd_1.setBackground(corFundoMenu);
-		slider_prin_azul_1.setBackground(corFundoMenu);
-
-		slider_Prin_verm.setBackground(corFundoMenu);
-		slider_Prin_verd.setBackground(corFundoMenu);
-		slider_prin_azul.setBackground(corFundoMenu);
-		slider_prin_trans.setBackground(corFundoMenu);
-
-		panel_cadastro.setBackground(corFundoMenu);
-
-		panel_conteiner_unidade.setBackground(corFundoMenu);
-		panel_conteiner_cfop.setBackground(corFundoMenu);
-		panel_conteiner_ncm.setBackground(corFundoMenu);
-		panel_conteiner_empresa.setBackground(corFundoMenu);
-	}
+	 
 
 	/**/
 	public void tabela() {
