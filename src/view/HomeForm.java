@@ -176,7 +176,8 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ativaPainel4();
+				controller.desativaPainel();
+				panel_config.setVisible(true);
 			}
 		});
 		lbl_configuracao.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -187,7 +188,8 @@ public class HomeForm extends JFrame {
 		pn_cadastro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ativaPainel3();
+				controller.desativaPainel();
+				panel_cadastro.setVisible(true);
 			}
 
 			@Override
@@ -229,8 +231,8 @@ public class HomeForm extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-//				modelProduto.carregar();
-				ativaPainel1();
+				controller.desativaPainel();
+				panel_1.setVisible(true);
 			}
 		});
 		pn_produto.setBorder(null);
@@ -261,7 +263,8 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ativaPainel2();
+				controller.desativaPainel();
+				panel_2.setVisible(true);
 			}
 		});
 		pn_relatorio.setBorder(null);
@@ -303,7 +306,9 @@ public class HomeForm extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("clique");
-				ativaPainel0();
+
+				controller.desativaPainel();
+				panel_0.setVisible(true);
 			}
 
 			@Override
@@ -695,7 +700,9 @@ public class HomeForm extends JFrame {
 		/**/
 
 		// chamaProduto();
-		ativaPainel0();
+
+		controller.desativaPainel();
+		panel_0.setVisible(true);
 	}
 
 	public void alteraCorPrincipal() {
@@ -748,12 +755,6 @@ public class HomeForm extends JFrame {
 	public void tabela() {
 		System.out.println("tabela chamada");
 		/* SEÇÃO DA TABELA */
-//		ArrayList a = new ArrayList();
-
-//		frame.getContentPane().add(table_1);
-
-//		final String colunas[] = { "s" };
-//		final String dados[][] = {};
 
 	}
 
@@ -761,34 +762,6 @@ public class HomeForm extends JFrame {
 //		Produto p = new Produto(id, nome);
 		modelProduto.addProduto(new Produto(id, nome));
 		System.out.println("salvando....");
-	}
-
-	 
-
-	public void ativaPainel0() {
-		controller.desativaPainel();
-		panel_0.setVisible(true);
-//		ativaPainel4();
-	}
-
-	public void ativaPainel1() {
-		controller.desativaPainel();
-		panel_1.setVisible(true);
-	}
-
-	private void ativaPainel2() {
-		controller.desativaPainel();
-		panel_2.setVisible(true);
-	}
-
-	private void ativaPainel3() {
-		controller.desativaPainel();
-		panel_cadastro.setVisible(true);
-	}
-
-	private void ativaPainel4() {
-		controller.desativaPainel();
-		panel_config.setVisible(true);
 	}
 
 	public void pressTela(MouseEvent e) {
@@ -806,42 +779,276 @@ public class HomeForm extends JFrame {
 		return panel_0;
 	}
 
-	public void setPanel_0(JPanel panel_0) {
-		this.panel_0 = panel_0;
-	}
-
 	public JPanel getPanel_1() {
 		return panel_1;
-	}
-
-	public void setPanel_1(JPanel panel_1) {
-		this.panel_1 = panel_1;
 	}
 
 	public JPanel getPanel_2() {
 		return panel_2;
 	}
 
-	public void setPanel_2(JPanel panel_2) {
-		this.panel_2 = panel_2;
-	}
-
 	public JPanel getPanel_cadastro() {
 		return panel_cadastro;
-	}
-
-	public void setPanel_cadastro(JPanel panel_cadastro) {
-		this.panel_cadastro = panel_cadastro;
 	}
 
 	public JPanel getPanel_config() {
 		return panel_config;
 	}
 
-	public void setPanel_config(JPanel panel_config) {
-		this.panel_config = panel_config;
+	public HomeController getController() {
+		return controller;
 	}
 
- 
-	
+	public int getXx() {
+		return xx;
+	}
+
+	public int getXy() {
+		return xy;
+	}
+
+	public int getR() {
+		return r;
+	}
+
+	public int getG() {
+		return g;
+	}
+
+	public int getB() {
+		return b;
+	}
+
+	public int getA() {
+		return a;
+	}
+
+	public int getRm() {
+		return rm;
+	}
+
+	public int getGm() {
+		return gm;
+	}
+
+	public int getBm() {
+		return bm;
+	}
+
+	public int getAm() {
+		return am;
+	}
+
+	public Color getCorPrincipal() {
+		return corPrincipal;
+	}
+
+	public Color getCorFundoMenu() {
+		return corFundoMenu;
+	}
+
+	public Color getCorFundoMenuFoco() {
+		return corFundoMenuFoco;
+	}
+
+	public TableModelProduto getModelProduto() {
+		return modelProduto;
+	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public JPanel getPn_conteudo() {
+		return pn_conteudo;
+	}
+
+	public JLayeredPane getLayeredPane() {
+		return layeredPane;
+	}
+
+	public JTable getTable_1() {
+		return table_1;
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	public JPanel getPn_sidebar() {
+		return pn_sidebar;
+	}
+
+	public JPanel getPn_home() {
+		return pn_home;
+	}
+
+	public JPanel getPn_produto() {
+		return pn_produto;
+	}
+
+	public JPanel getPn_relatorio() {
+		return pn_relatorio;
+	}
+
+	public JPanel getPn_cadastro() {
+		return pn_cadastro;
+	}
+
+	public JPanel getPn_configuracao() {
+		return pn_configuracao;
+	}
+
+	public JLabel getLbl_fechar() {
+		return lbl_fechar;
+	}
+
+	public JLabel getLbl_home() {
+		return lbl_home;
+	}
+
+	public JLabel getLbl_produto() {
+		return lbl_produto;
+	}
+
+	public JLabel getLbl_relatorio() {
+		return lbl_relatorio;
+	}
+
+	public JLabel getLbl_cadastro() {
+		return lbl_cadastro;
+	}
+
+	public JLabel getLbl_configuracao() {
+		return lbl_configuracao;
+	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JTextPane getTxtNome() {
+		return txtNome;
+	}
+
+	public JButton getBtnAdicionar() {
+		return btnAdicionar;
+	}
+
+	public JButton getBtnRemover() {
+		return btnRemover;
+	}
+
+	public JLabel getLblBtnCfop() {
+		return lblBtnCfop;
+	}
+
+	public JLabel getLblBtnNcm() {
+		return lblBtnNcm;
+	}
+
+	public JLabel getLblBtnUnidade() {
+		return lblBtnUnidade;
+	}
+
+	public JLabel getLblPnCorPrincipal() {
+		return lblPnCorPrincipal;
+	}
+
+	public JLabel getLblVermelho() {
+		return lblVermelho;
+	}
+
+	public JLabel getLblVerde() {
+		return lblVerde;
+	}
+
+	public JLabel getLblAzul() {
+		return lblAzul;
+	}
+
+	public JLabel getLblTrasnparencia() {
+		return lblTrasnparencia;
+	}
+
+	public JSlider getSlider_Prin_verm() {
+		return slider_Prin_verm;
+	}
+
+	public JSlider getSlider_Prin_verd() {
+		return slider_Prin_verd;
+	}
+
+	public JSlider getSlider_prin_azul() {
+		return slider_prin_azul;
+	}
+
+	public JSlider getSlider_prin_trans() {
+		return slider_prin_trans;
+	}
+
+	public JPanel getPanel_cor_principal() {
+		return panel_cor_principal;
+	}
+
+	public JPanel getPanel_cor_principal_1() {
+		return panel_cor_principal_1;
+	}
+
+	public JLabel getLblCorMenu() {
+		return lblCorMenu;
+	}
+
+	public JLabel getLblVermelho_1() {
+		return lblVermelho_1;
+	}
+
+	public JLabel getLblVerde_1() {
+		return lblVerde_1;
+	}
+
+	public JLabel getLblAzul_1() {
+		return lblAzul_1;
+	}
+
+	public JSlider getSlider_Prin_verm_1() {
+		return slider_Prin_verm_1;
+	}
+
+	public JSlider getSlider_Prin_verd_1() {
+		return slider_Prin_verd_1;
+	}
+
+	public JSlider getSlider_prin_azul_1() {
+		return slider_prin_azul_1;
+	}
+
+	public JLabel getLblBtnEmpresa() {
+		return lblBtnEmpresa;
+	}
+
+	public JLabel getLblConfiguracoes() {
+		return lblConfiguracoes;
+	}
+
+	public JPanel getPanel_conteiner_unidade() {
+		return panel_conteiner_unidade;
+	}
+
+	public JPanel getPanel_conteiner_cfop() {
+		return panel_conteiner_cfop;
+	}
+
+	public JPanel getPanel_conteiner_ncm() {
+		return panel_conteiner_ncm;
+	}
+
+	public JPanel getPanel_conteiner_empresa() {
+		return panel_conteiner_empresa;
+	}
+
 }
