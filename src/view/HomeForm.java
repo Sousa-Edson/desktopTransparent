@@ -30,6 +30,8 @@ import model.Produto;
 import model.TableModelProduto;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class HomeForm extends JFrame {
 
@@ -100,6 +102,7 @@ public class HomeForm extends JFrame {
 	private final JSlider slider_Prin_verm_1 = new JSlider();
 	private final JSlider slider_Prin_verd_1 = new JSlider();
 	private final JSlider slider_prin_azul_1 = new JSlider();
+	private JSlider slider_prin_opacidade = new JSlider();
 	private final JLabel lblBtnEmpresa = new JLabel("Empresas");
 	private final JLabel lblConfiguracoes = new JLabel("Configurações");
 	private final JPanel panel_conteiner_unidade = new JPanel();
@@ -172,8 +175,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pn_configuracao.setBackground(corFundoMenu);
-				lbl_configuracao.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 
 			@Override
@@ -202,8 +204,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pn_cadastro.setBackground(corFundoMenu);
-				lbl_cadastro.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 		});
 
@@ -228,8 +229,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pn_produto.setBackground(corFundoMenu);
-				lbl_produto.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 
 			public void mouseClicked(MouseEvent e) {
@@ -259,8 +259,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pn_relatorio.setBackground(corFundoMenu);
-				lbl_relatorio.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 
 			@Override
@@ -315,8 +314,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pn_home.setBackground(corFundoMenu);
-				lbl_home.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 		});
 
@@ -346,7 +344,7 @@ public class HomeForm extends JFrame {
 		tabela();
 		table_1 = new JTable(modelProduto); // ver se vai dar erro
 		table_1.getTableHeader().setReorderingAllowed(false);
-		scrollPane = new JScrollPane(table_1); 
+		scrollPane = new JScrollPane(table_1);
 
 		panel_1.setBackground(new Color(255, 0, 255));
 		panel_1.setBounds(0, 0, 987, 532);
@@ -373,6 +371,172 @@ public class HomeForm extends JFrame {
 //				modelProduto.addProduto(p);
 			}
 		});
+
+		panel_config.setBackground(corFundoMenu);
+		panel_config.setBounds(0, 0, 987, 532);
+		layeredPane.add(panel_config);
+		panel_config.setLayout(null);
+
+		panel_cor_principal.setBackground(corFundoMenu);
+		panel_cor_principal.setBounds(163, 151, 300, 331);
+		panel_config.add(panel_cor_principal);
+		panel_cor_principal.setLayout(null);
+		lblPnCorPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPnCorPrincipal.setForeground(Color.WHITE);
+		lblPnCorPrincipal.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblPnCorPrincipal.setBounds(12, 12, 276, 32);
+
+		panel_cor_principal.add(lblPnCorPrincipal);
+		lblVermelho.setForeground(Color.WHITE);
+		lblVermelho.setBounds(12, 56, 276, 15);
+
+		panel_cor_principal.add(lblVermelho);
+		lblVerde.setForeground(Color.WHITE);
+		lblVerde.setBounds(12, 101, 276, 15);
+
+		panel_cor_principal.add(lblVerde);
+		lblAzul.setForeground(Color.WHITE);
+		lblAzul.setBounds(12, 153, 276, 15);
+
+		panel_cor_principal.add(lblAzul);
+		lblTrasnparencia.setForeground(Color.WHITE);
+		lblTrasnparencia.setBounds(12, 201, 276, 15);
+
+		panel_cor_principal.add(lblTrasnparencia);
+		slider_prin_trans.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorPrincipal();
+			}
+		});
+		slider_prin_trans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_prin_trans.setBounds(12, 228, 200, 16);
+		slider_prin_trans.setBackground(corFundoMenu);
+		panel_cor_principal.add(slider_prin_trans);
+
+		slider_prin_trans.setMaximum(255);
+		slider_Prin_verm.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorPrincipal();
+			}
+		});
+		slider_Prin_verm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_Prin_verm.setBackground(Color.BLACK);
+		slider_Prin_verm.setMaximum(255);
+		slider_Prin_verm.setBounds(12, 73, 200, 16);
+		slider_Prin_verm.setBackground(corFundoMenu);
+		panel_cor_principal.add(slider_Prin_verm);
+		slider_Prin_verd.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorPrincipal();
+			}
+		});
+		slider_Prin_verd.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_Prin_verd.setMaximum(255);
+		slider_Prin_verd.setBounds(12, 125, 200, 16);
+		slider_Prin_verd.setBackground(corFundoMenu);
+
+		panel_cor_principal.add(slider_Prin_verd);
+		slider_prin_azul.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorPrincipal();
+			}
+		});
+		slider_prin_azul.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_prin_azul.setMaximum(255);
+		slider_prin_azul.setBounds(12, 173, 200, 16);
+		slider_prin_azul.setBackground(corFundoMenu);
+		panel_cor_principal.add(slider_prin_azul);
+
+		JLabel lblOpacidade = new JLabel("Opacidade");
+		lblOpacidade.setForeground(Color.WHITE);
+		lblOpacidade.setBounds(12, 256, 276, 15);
+		panel_cor_principal.add(lblOpacidade);
+		slider_prin_opacidade.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraOpacidade();
+			}
+		});
+
+		slider_prin_opacidade.setValue(90);
+		slider_prin_opacidade.setBackground(new Color(153, 193, 241));
+		slider_prin_opacidade.setBounds(12, 283, 200, 16);
+		panel_cor_principal.add(slider_prin_opacidade);
+		panel_cor_principal_1.setLayout(null);
+		panel_cor_principal_1.setBackground(corFundoMenu);
+		panel_cor_principal_1.setBounds(475, 151, 300, 249);
+
+		panel_config.add(panel_cor_principal_1);
+		lblCorMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCorMenu.setForeground(Color.WHITE);
+		lblCorMenu.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCorMenu.setBounds(12, 12, 276, 32);
+
+		panel_cor_principal_1.add(lblCorMenu);
+		lblVermelho_1.setForeground(Color.WHITE);
+		lblVermelho_1.setBounds(12, 56, 276, 15);
+
+		panel_cor_principal_1.add(lblVermelho_1);
+		lblVerde_1.setForeground(Color.WHITE);
+		lblVerde_1.setBounds(12, 101, 276, 15);
+
+		panel_cor_principal_1.add(lblVerde_1);
+		lblAzul_1.setForeground(Color.WHITE);
+		lblAzul_1.setBounds(12, 153, 276, 15);
+
+		panel_cor_principal_1.add(lblAzul_1);
+		slider_Prin_verm_1.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorMenu();
+			}
+		});
+		slider_Prin_verm_1.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+			}
+		});
+		slider_Prin_verm_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_Prin_verm_1.setMaximum(255);
+		slider_Prin_verm_1.setBackground(corFundoMenu);
+		slider_Prin_verm_1.setValue(153);
+		slider_Prin_verm_1.setBounds(12, 73, 200, 16);
+
+		panel_cor_principal_1.add(slider_Prin_verm_1);
+		slider_Prin_verd_1.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorMenu();
+			}
+		});
+		slider_Prin_verd_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_Prin_verd_1.setMaximum(255);
+		slider_Prin_verd_1.setBackground(corFundoMenu);
+		slider_Prin_verd_1.setValue(193);
+		slider_Prin_verd_1.setBounds(12, 125, 200, 16);
+
+		panel_cor_principal_1.add(slider_Prin_verd_1);
+		slider_prin_azul_1.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				controller.alteraCorMenu();
+			}
+		});
+		slider_prin_azul_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		slider_prin_azul_1.setMaximum(255);
+		slider_prin_azul_1.setBackground(corFundoMenu);
+		slider_prin_azul_1.setValue(241);
+		slider_prin_azul_1.setBounds(12, 173, 200, 16);
+
+		panel_cor_principal_1.add(slider_prin_azul_1);
+		lblConfiguracoes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConfiguracoes.setForeground(Color.WHITE);
+		lblConfiguracoes.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblConfiguracoes.setBounds(12, 12, 276, 32);
+
+		panel_config.add(lblConfiguracoes);
 		panel_cadastro.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		panel_cadastro.setBounds(0, 0, 987, 532);
 		layeredPane.add(panel_cadastro);
@@ -394,8 +558,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_conteiner_unidade.setBackground(corFundoMenu);
-				lblBtnUnidade.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 
 			@Override
@@ -428,8 +591,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_conteiner_cfop.setBackground(corFundoMenu);
-				lblBtnCfop.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 		});
 		panel_conteiner_cfop.setBounds(253, 100, 229, 200);
@@ -455,8 +617,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_conteiner_ncm.setBackground(corFundoMenu);
-				lblBtnNcm.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 		});
 		panel_conteiner_ncm.setLayout(null);
@@ -481,8 +642,7 @@ public class HomeForm extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_conteiner_empresa.setBackground(corFundoMenu);
-				lblBtnEmpresa.setForeground(Color.black);
+				controller.saidaMouse();
 			}
 		});
 		panel_conteiner_empresa.setLayout(null);
@@ -498,159 +658,6 @@ public class HomeForm extends JFrame {
 		lblBtnEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBtnEmpresa.setForeground(Color.WHITE);
 		lblBtnEmpresa.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-
-		panel_config.setBackground(corFundoMenu);
-		panel_config.setBounds(0, 0, 987, 532);
-		layeredPane.add(panel_config);
-		panel_config.setLayout(null);
-
-		panel_cor_principal.setBackground(corFundoMenu);
-		panel_cor_principal.setBounds(163, 151, 300, 249);
-		panel_config.add(panel_cor_principal);
-		panel_cor_principal.setLayout(null);
-		lblPnCorPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPnCorPrincipal.setForeground(Color.WHITE);
-		lblPnCorPrincipal.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblPnCorPrincipal.setBounds(12, 12, 276, 32);
-
-		panel_cor_principal.add(lblPnCorPrincipal);
-		lblVermelho.setForeground(Color.WHITE);
-		lblVermelho.setBounds(12, 56, 276, 15);
-
-		panel_cor_principal.add(lblVermelho);
-		lblVerde.setForeground(Color.WHITE);
-		lblVerde.setBounds(12, 101, 276, 15);
-
-		panel_cor_principal.add(lblVerde);
-		lblAzul.setForeground(Color.WHITE);
-		lblAzul.setBounds(12, 153, 276, 15);
-
-		panel_cor_principal.add(lblAzul);
-		lblTrasnparencia.setForeground(Color.WHITE);
-		lblTrasnparencia.setBounds(12, 201, 276, 15);
-
-		panel_cor_principal.add(lblTrasnparencia);
-		slider_prin_trans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-		slider_prin_trans.setBounds(12, 228, 200, 16);
-		slider_prin_trans.setBackground(corFundoMenu);
-		panel_cor_principal.add(slider_prin_trans);
-		slider_prin_trans.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorPrincipal();
-			}
-		});
-		slider_prin_trans.setMaximum(255);
-		slider_Prin_verm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		slider_Prin_verm.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorPrincipal();
-			}
-		});
-
-		slider_Prin_verm.setBackground(Color.BLACK);
-		slider_Prin_verm.setMaximum(255);
-		slider_Prin_verm.setBounds(12, 73, 200, 16);
-		slider_Prin_verm.setBackground(corFundoMenu);
-		panel_cor_principal.add(slider_Prin_verm);
-		slider_Prin_verd.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		slider_Prin_verd.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorPrincipal();
-			}
-		});
-		slider_Prin_verd.setMaximum(255);
-		slider_Prin_verd.setBounds(12, 125, 200, 16);
-		slider_Prin_verd.setBackground(corFundoMenu);
-
-		panel_cor_principal.add(slider_Prin_verd);
-		slider_prin_azul.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		slider_prin_azul.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorPrincipal();
-			}
-			
-		});
-		slider_prin_azul.setMaximum(255);
-		slider_prin_azul.setBounds(12, 173, 200, 16);
-		slider_prin_azul.setBackground(corFundoMenu);
-		panel_cor_principal.add(slider_prin_azul);
-		panel_cor_principal_1.setLayout(null);
-		panel_cor_principal_1.setBackground(corFundoMenu);
-		panel_cor_principal_1.setBounds(475, 151, 300, 249);
-
-		panel_config.add(panel_cor_principal_1);
-		lblCorMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCorMenu.setForeground(Color.WHITE);
-		lblCorMenu.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblCorMenu.setBounds(12, 12, 276, 32);
-
-		panel_cor_principal_1.add(lblCorMenu);
-		lblVermelho_1.setForeground(Color.WHITE);
-		lblVermelho_1.setBounds(12, 56, 276, 15);
-
-		panel_cor_principal_1.add(lblVermelho_1);
-		lblVerde_1.setForeground(Color.WHITE);
-		lblVerde_1.setBounds(12, 101, 276, 15);
-
-		panel_cor_principal_1.add(lblVerde_1);
-		lblAzul_1.setForeground(Color.WHITE);
-		lblAzul_1.setBounds(12, 153, 276, 15);
-
-		panel_cor_principal_1.add(lblAzul_1);
-		slider_Prin_verm_1.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-			}
-		});
-		slider_Prin_verm_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		slider_Prin_verm_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorMenu();
-			}
-		});
-		slider_Prin_verm_1.setMaximum(255);
-		slider_Prin_verm_1.setBackground(corFundoMenu);
-		slider_Prin_verm_1.setValue(153);
-		slider_Prin_verm_1.setBounds(12, 73, 200, 16);
-
-		panel_cor_principal_1.add(slider_Prin_verm_1);
-		slider_Prin_verd_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		slider_Prin_verd_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorMenu();
-			}
-		});
-		slider_Prin_verd_1.setMaximum(255);
-		slider_Prin_verd_1.setBackground(corFundoMenu);
-		slider_Prin_verd_1.setValue(193);
-		slider_Prin_verd_1.setBounds(12, 125, 200, 16);
-
-		panel_cor_principal_1.add(slider_Prin_verd_1);
-		slider_prin_azul_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		slider_prin_azul_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controller.alteraCorMenu();
-			}
-		});
-		slider_prin_azul_1.setMaximum(255);
-		slider_prin_azul_1.setBackground(corFundoMenu);
-		slider_prin_azul_1.setValue(241);
-		slider_prin_azul_1.setBounds(12, 173, 200, 16);
-
-		panel_cor_principal_1.add(slider_prin_azul_1);
-		lblConfiguracoes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConfiguracoes.setForeground(Color.WHITE);
-		lblConfiguracoes.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblConfiguracoes.setBounds(12, 12, 276, 32);
-
-		panel_config.add(lblConfiguracoes);
 
 		panel_2.setBackground(new Color(0, 255, 0));
 		panel_2.setBounds(0, 0, 987, 532);
@@ -706,10 +713,6 @@ public class HomeForm extends JFrame {
 		controller.desativaPainel();
 		panel_0.setVisible(true);
 	}
-
-	 
-
-	 
 
 	/**/
 	public void tabela() {
@@ -951,6 +954,10 @@ public class HomeForm extends JFrame {
 		return slider_prin_trans;
 	}
 
+	public JSlider getSlider_prin_opacidade() {
+		return slider_prin_opacidade;
+	}
+
 	public JPanel getPanel_cor_principal() {
 		return panel_cor_principal;
 	}
@@ -1010,5 +1017,4 @@ public class HomeForm extends JFrame {
 	public JPanel getPanel_conteiner_empresa() {
 		return panel_conteiner_empresa;
 	}
-
 }
